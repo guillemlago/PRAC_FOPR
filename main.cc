@@ -18,6 +18,38 @@ vector<vector<int>> entradaPistes(int n) {
     return pistes;
 }
 
+//DESC: Marcar amb X caselles en un rectangle delimitat per l'usuari.
+//PRE: Entra la situació del tauler, la fila i columna de inici del rectangle i la fila i columna del final del rectangle.
+//POST: Posa X totes les posicions dins del rectangle.
+/*void marcarCaselles(vector<vector<char>>& tauler, int fila1, int columna1, int fila2, int columna2){
+	int filaInici, filaFi, columnaInici, columnaFi;
+	filaInici = fila1;
+	filaFi = fila2;
+	columnaInici = columna1;
+	columnaFi = columna2;
+	for(int i=filaInici;i<filaFi;++i){
+		for(int j=columnaInici;i<columnaFi;++j){
+			tauler[i - 1][j - 1] = 'X';
+		}
+	}
+}*/
+
+//DESC: Desmarcar amb . caselles en un rectangle delimitat per l'usuari.
+//PRE: Entra la situació del tauler, la fila i columna de inici del rectangle i la fila i columna del final del rectangle.
+//POST: Posa . totes les posicions dins del rectangle.
+/*void desmarcarCaselles(vector<vector<char>>& tauler, int fila1, int columna1, int fila2, int columna2){
+	int filaInici, filaFi, columnaInici, columnaFi;
+	filaInici = fila1;
+	filaFi = fila2;
+	columnaInici = columna1;
+	columnaFi = columna2;
+	for(int i=filaInici;i<filaFi;++i){
+		for(int j=columnaInici;i<columnaFi;++j){
+			tauler[i - 1][j - 1] = '.';
+		}
+	}
+}*/
+
 //DESC: Funció per a mostrar el tauler del nanograma.
 //PRE: 
 //POST: 
@@ -82,7 +114,7 @@ void mostrarTauler(const vector<vector<char>>& tauler, const vector<vector<int>>
     }
 }
 
-//Funció agafa sequencia (fila o columna) i un vector pista (tant pot ser del vector pistesFiles com del pistesColumnes)
+//DESC: Funció agafa sequencia (fila o columna) i un vector pista (tant pot ser del vector pistesFiles com del pistesColumnes)
 //PRE: entren el vector sequencia actual i el vector pistes seleccionat.
 //POST: surt un bool dient si la sequencia anterior és solució o no
 bool validaSequencia(const vector<char>& sequencia, const vector<int>& pista){
@@ -108,7 +140,7 @@ bool validaSequencia(const vector<char>& sequencia, const vector<int>& pista){
 	return blocs == pista; //Bool. Si tots dos vectors son iguals, la seqüència és vàlida!
 }
 
-//Funció comprova si la matriu tauler és solució segons matrius pistesFiles i pistesColumnes. Empra funció anterior "validaSequencia" iterant fila per fila i columna per columna.
+//DESC: Funció comprova si la matriu tauler és solució segons matrius pistesFiles i pistesColumnes. Empra funció anterior "validaSequencia" iterant fila per fila i columna per columna.
 //PRE: Entren una matriu tauler actual entrat per l'usuari, la matriu pistesFiles i pistesColumnes.
 //POST: Surt un bool que determina si la matriu és solució o no.
 bool validaNanograma(const vector<vector<char>>& tauler,const vector<vector<int>>& pistesFiles, const vector<vector<int>>& pistesColumnes) {
@@ -121,23 +153,23 @@ bool validaNanograma(const vector<vector<char>>& tauler,const vector<vector<int>
 	while(i < files and !parar){ // Validació de les files
 		//Inv: 'i' fa referència a l'índex de la filera actual. Totes les fileres passades fins ara son vàlides.
 		if (!validaSequencia(tauler[i], pistesFiles[i])) {
-            			parar = true;
-        	}
-        	++i;
+			parar = true;
+        }
+        ++i;
 	}
 
 	while(j < columnes and !parar){
 		//Inv: 'j' fa referència a la columna actual. Totes les columnes passades fins ara són vàlides.
 		//Posem en vector tots els elements de la columna per validar amb validaSequencia. ESQUEMA RECORREGUT.
 		vector<char> columna;
-        	for (int i = 0; i < files; ++i) {
-        		//Tots els elements fins ara de la columna 'j' han estat afegits a vector columna.
-			columna.push_back(tauler[i][j]);
-        	}
+        for (int i = 0; i < files; ++i) {
+        	//Tots els elements fins ara de la columna 'j' han estat afegits a vector columna.
+		columna.push_back(tauler[i][j]);
+        }
         	
-        	if(!validaSequencia(columna, pistesColumnes[j])){
+        if(!validaSequencia(columna, pistesColumnes[j])){
 			parar = true;
-        	}
+        }
 		++j;
 	}
 	
@@ -147,9 +179,6 @@ bool validaNanograma(const vector<vector<char>>& tauler,const vector<vector<int>
 	parar = true; // És vàlid si totes les files i columnes compleixen
 	return resultat;
 }
-	
-
-	
 
 int main() {
 
@@ -162,8 +191,6 @@ int main() {
     // Llegir l'entrada de les pistes de les files i de columnes.
     vector<vector<int>> pistesFiles = entradaPistes(files);
     vector<vector<int>> pistesColumnes = entradaPistes(columnes);
-    
-
 
     /*APARTAT 2 de FUNCIONAMENT - MOSTRAR EL TAULER INICIAL*/
 
@@ -188,7 +215,7 @@ int main() {
     cout << "E - Desmarcar fila i columna." << endl;
     cout << "F - Desmarcar caselles." << endl;
     cout << "R - Restaurar el tauler." << endl;
-    cout << "S - Estat del tauler.." << endl;
+    cout << "S - Estat del tauler." << endl;
     cout << "Z - Sortir del joc." << endl;
 
     cout << "Opcio: ";
@@ -200,49 +227,70 @@ int main() {
 		// Marcar fila columna - OPCIÓ A
 		if (opc == 'A') {
 			cin >> fila1 >> columna1;
-            		tauler[fila1 - 1][columna1 - 1] = 'X'; // Marcar una casella
-            		moviments++;
+            tauler[fila1 - 1][columna1 - 1] = 'X'; // Marcar una casella
+            moviments++;
 		}
 		
-        	// Marcar conjunt de caselles - OPCIÓ B
-        	else if (opc == 'B') {
+        // Marcar conjunt de caselles - OPCIÓ B
+        else if (opc == 'B') {
 			cin >> fila1 >> columna2 >> fila2 >> columna2;
 			moviments++;
-            	// Funcion para marcar area de caselles - PER FER!
+            //marcarCaselles(tauler, fila1 - 1, columna1 - 1, fila2 - 1, columna2 - 1);
+            int filaInici, filaFi, columnaInici, columnaFi;
+			filaInici = fila1;
+			filaFi = fila2;
+			columnaInici = columna1;
+			columnaFi = columna2;
+			for(int i = filaInici; i < filaFi; ++i){
+				for(int j = columnaInici; j < columnaFi; ++j){
+					tauler[i - 1][j - 1] = 'X';
+				}
+			}
 		}   
         
-        	// Desmarcar fila i columna - OPCIÓ E
-        	else if (opc == 'E') {
+        // Desmarcar fila i columna - OPCIÓ E
+        else if (opc == 'E') {
 			cin >> fila1 >> columna1;
-            		tauler[fila1 - 1][columna1 - 1] = '.'; // Marcar una casella
-            		moviments++;
+            tauler[fila1 - 1][columna1 - 1] = '.'; // Marcar una casella
+            moviments++;
 		}
         	
-        	// Desmarcar conjunt de caselles - OPCIÓ F
-        	else if (opc == 'F') {
+        // Desmarcar conjunt de caselles - OPCIÓ F
+        else if (opc == 'F') {
 			cin >> fila1 >> columna2 >> fila2 >> columna2;
 			moviments++;
-            	// Funcion para marcar area de caselles - PER FER!
+			//desmarcarCaselles(tauler, fila1 - 1, columna1 - 1, fila2 - 1, columna2 - 1);
+			int filaInici, filaFi, columnaInici, columnaFi;
+			filaInici = fila1;
+			filaFi = fila2;
+			columnaInici = columna1;
+			columnaFi = columna2;
+			for(int i = filaInici; i < filaFi; ++i){
+				for(int j = columnaInici; j < columnaFi; ++j){
+					tauler[i - 1][j - 1] = '.';
+				}
+			}
 		}
         
-        	// Restaurar el tauler - OPCIÓ R
-        	else if (opc == 'R') {
+        // Restaurar el tauler - OPCIÓ R
+        else if (opc == 'R') {
 			tauler = taulerInicial; // Iguala el tauler al tauler inicial
 			moviments = 0;
-            		cout << endl;
+            cout << endl;
 		}
         	
-        	// Estat del tauler - OPCIÓ S
-        	else if (opc == 'S') {
+        // Estat del tauler - OPCIÓ S
+        else if (opc == 'S') {
 			mostrarTauler(tauler, pistesFiles, pistesColumnes);
-            	cout << endl;
-        	}
+            cout << endl;
+        }
         
-        	// Sortir del programa - OPCIÓ Z
-        	else if (opc == 'Z') {
+        // Sortir del programa - OPCIÓ Z
+        else if (opc == 'Z') {
 			cout << "Has sortit del joc. Fins aviat!" << endl;
-            	continuar=false;
-		
+			cout << "Moviments: " << moviments << endl;
+            continuar=false;
+            
 		} else {
 			cout << "Opcio no vàlida!" << endl;
 		}  
