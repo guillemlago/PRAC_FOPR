@@ -60,7 +60,11 @@ void mostrarTauler(const vector<vector<char>>& tauler, const vector<vector<int>>
     // Mostra la numeració de les columnes del tauler
     cout << "    ";
     for (int j = 1; j <= columnes; ++j) {
-        cout << " " << j << " ";
+		if(j < 9) {
+			cout << " " << j << " ";
+		} else {
+			cout << " " << j;
+		}
     }
     cout << endl;
 
@@ -73,7 +77,7 @@ void mostrarTauler(const vector<vector<char>>& tauler, const vector<vector<int>>
 
     // Mostrar la numeració de les pistes de la part dreta de les files
     for (int i = 0; i < files; ++i) {
-		if(i<9) {
+		if(i < 9) {
 			cout << " ";
 		}
         cout << (i + 1) << " |"; // Numeración de files
@@ -201,25 +205,14 @@ int main() {
     // Mostrar el tauler inicial.
     mostrarTauler(tauler, pistesFiles, pistesColumnes);
 
-    /*APARTAT 3 de FUNCIONAMENT - SWITCH D'OPCIONS PER INTERACTUAR AMB EL JOC*/
+    /*APARTAT 3 de FUNCIONAMENT - INTERACTUAR AMB EL JOC*/
 
     char opc;
     int fila1, fila2, columna1, columna2;
 
     bool continuar=true;
     int moviments = 0;
-    
-    // Mostrar el menu d'opcions
-    cout << "\nA - Marcar fila i columna." << endl;
-    cout << "B - Marcar caselles." << endl;
-    cout << "E - Desmarcar fila i columna." << endl;
-    cout << "F - Desmarcar caselles." << endl;
-    cout << "R - Restaurar el tauler." << endl;
-    cout << "S - Estat del tauler." << endl;
-    cout << "Z - Sortir del joc." << endl;
 
-    cout << "Opcio: ";
-    
 	while(continuar){
 
 		cin >> opc;
@@ -235,15 +228,9 @@ int main() {
         else if (opc == 'B') {
 			cin >> fila1 >> columna2 >> fila2 >> columna2;
 			moviments++;
-            //marcarCaselles(tauler, fila1 - 1, columna1 - 1, fila2 - 1, columna2 - 1);
-            int filaInici, filaFi, columnaInici, columnaFi;
-			filaInici = fila1;
-			filaFi = fila2;
-			columnaInici = columna1;
-			columnaFi = columna2;
-			for(int i = filaInici; i < filaFi; ++i){
-				for(int j = columnaInici; j < columnaFi; ++j){
-					tauler[i - 1][j - 1] = 'X';
+			for(int i = fila1 - 1; i < fila2; ++i){
+				for(int j = columna1 - 1; j < columna2; ++j){
+					tauler[i][j] = 'X';
 				}
 			}
 		}   
@@ -259,15 +246,9 @@ int main() {
         else if (opc == 'F') {
 			cin >> fila1 >> columna2 >> fila2 >> columna2;
 			moviments++;
-			//desmarcarCaselles(tauler, fila1 - 1, columna1 - 1, fila2 - 1, columna2 - 1);
-			int filaInici, filaFi, columnaInici, columnaFi;
-			filaInici = fila1;
-			filaFi = fila2;
-			columnaInici = columna1;
-			columnaFi = columna2;
-			for(int i = filaInici; i < filaFi; ++i){
-				for(int j = columnaInici; j < columnaFi; ++j){
-					tauler[i - 1][j - 1] = '.';
+			for(int i = fila1 - 1; i < fila2; ++i){
+				for(int j = columna1 - 1; j < columna2; ++j){
+					tauler[i][j] = '.';
 				}
 			}
 		}
@@ -290,10 +271,7 @@ int main() {
 			cout << "Has sortit del joc. Fins aviat!" << endl;
 			cout << "Moviments: " << moviments << endl;
             continuar=false;
-            
-		} else {
-			cout << "Opcio no vàlida!" << endl;
-		}  
+		} 
 		
 		/*APARTAT 4 de FUNCIONAMENT - FINALITZACIÓ DEL JOC*/
     	
