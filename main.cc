@@ -58,12 +58,12 @@ void mostrarTauler(const vector<vector<char>>& tauler, const vector<vector<int>>
     int columnes = tauler[0].size();
 
     // Mostra la numeració de les columnes del tauler
-    cout << "    ";
+    cout << "   ";
     for (int j = 1; j <= columnes; ++j) {
 		if(j < 9) {
 			cout << " " << j << " ";
 		} else {
-			cout << " " << j;
+			cout << "  " << j;
 		}
     }
     cout << endl;
@@ -73,7 +73,7 @@ void mostrarTauler(const vector<vector<char>>& tauler, const vector<vector<int>>
     for (int j = 1; j <= columnes; ++j) {
         cout << "---";
     }
-    cout << "-" << endl;
+    cout << endl;
 
     // Mostrar la numeració de les pistes de la part dreta de les files
     for (int i = 0; i < files; ++i) {
@@ -85,10 +85,14 @@ void mostrarTauler(const vector<vector<char>>& tauler, const vector<vector<int>>
             cout << " " << tauler[i][j] << " ";
         }
         cout << "| ";
-        for (int p : pistesFiles[i]) { // Mostrar pistes de files
-            cout << p << " ";
-        }
-        cout << endl;
+        
+        for (unsigned j = 0; j < pistesFiles[i].size(); ++j) { 
+			cout << pistesFiles[i][j];
+			if (j < pistesFiles[i].size() - 1) { // Si no es l'ultim element, posa un espai
+				cout << " ";
+			}
+		}
+		cout << endl;
     }
 
     // Mostrar linea separadora inferior del tauler
@@ -268,7 +272,7 @@ int main() {
         // Sortir del programa - OPCIÓ Z
         else if (opc == 'Z') {
 			cout << "Has sortit del joc. Fins aviat!" << endl;
-			cout << "Moviments: " << moviments << endl;
+			cout << "Nombre de moviments: " << moviments << endl;
             continuar=false;
 		} 
 		
@@ -277,7 +281,7 @@ int main() {
 		if(validaNanograma(tauler, pistesFiles, pistesColumnes)){
 			mostrarTauler(tauler, pistesFiles, pistesColumnes);
 			cout << "Has guanyat!" << endl;
-			cout << "Moviments: " << moviments << endl;
+			cout << "Nombre de moviments: " << moviments << endl;
 			continuar = false;
 		}
 	     
