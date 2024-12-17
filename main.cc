@@ -204,6 +204,7 @@ int main() {
 
     // Mostrar el tauler inicial.
     mostrarTauler(tauler, pistesFiles, pistesColumnes);
+    cout << endl;
 
     /*APARTAT 3 de FUNCIONAMENT - INTERACTUAR AMB EL JOC*/
 
@@ -216,7 +217,6 @@ int main() {
 	while(continuar){
 
 		cin >> opc;
-        	cout << endl;
 		// Marcar fila columna - OPCIÓ A
 		if (opc == 'A') {
 			cin >> fila1 >> columna1;
@@ -226,13 +226,10 @@ int main() {
 		
         // Marcar conjunt de caselles - OPCIÓ B
         else if (opc == 'B') {
-			cout << "hola" << endl;
 			cin >> fila1 >> columna1 >> fila2 >> columna2;
 			moviments++;
 			for(int i = fila1 - 1; i < fila2; ++i){
 				for(int j = columna1 - 1; j < columna2; ++j){
-					cout << i << endl;
-					cout << j << endl; 
 					tauler[i][j] = 'X';
 				}
 			}
@@ -260,7 +257,6 @@ int main() {
         else if (opc == 'R') {
 			tauler = taulerInicial; // Iguala el tauler al tauler inicial
 			moviments = 0;
-            cout << endl;
 		}
         	
         // Estat del tauler - OPCIÓ S
@@ -286,5 +282,4 @@ int main() {
 		}
 	     
 	}
-	
 }
