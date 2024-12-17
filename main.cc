@@ -100,7 +100,7 @@ void mostrarTauler(const vector<vector<char>>& tauler, const vector<vector<int>>
     for (int j = 1; j <= columnes; ++j) {
         cout << "---";
     }
-    cout << "-" << endl;
+    cout << endl;
 
     // Mostrar les pistes de columnes sota el tauler
     int maxpistesCol = 0;
