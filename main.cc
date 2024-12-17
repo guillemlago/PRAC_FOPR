@@ -226,10 +226,13 @@ int main() {
 		
         // Marcar conjunt de caselles - OPCIÓ B
         else if (opc == 'B') {
-			cin >> fila1 >> columna2 >> fila2 >> columna2;
+			cout << "hola" << endl;
+			cin >> fila1 >> columna1 >> fila2 >> columna2;
 			moviments++;
 			for(int i = fila1 - 1; i < fila2; ++i){
 				for(int j = columna1 - 1; j < columna2; ++j){
+					cout << i << endl;
+					cout << j << endl; 
 					tauler[i][j] = 'X';
 				}
 			}
@@ -244,7 +247,7 @@ int main() {
         	
         // Desmarcar conjunt de caselles - OPCIÓ F
         else if (opc == 'F') {
-			cin >> fila1 >> columna2 >> fila2 >> columna2;
+			cin >> fila1 >> columna1 >> fila2 >> columna2;
 			moviments++;
 			for(int i = fila1 - 1; i < fila2; ++i){
 				for(int j = columna1 - 1; j < columna2; ++j){
