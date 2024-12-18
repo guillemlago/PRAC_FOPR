@@ -18,38 +18,6 @@ vector<vector<int>> entradaPistes(int n) {
     return pistes;
 }
 
-//DESC: Marcar amb X caselles en un rectangle delimitat per l'usuari.
-//PRE: Entra la situació del tauler, la fila i columna de inici del rectangle i la fila i columna del final del rectangle.
-//POST: Posa X totes les posicions dins del rectangle.
-/*void marcarCaselles(vector<vector<char>>& tauler, int fila1, int columna1, int fila2, int columna2){
-	int filaInici, filaFi, columnaInici, columnaFi;
-	filaInici = fila1;
-	filaFi = fila2;
-	columnaInici = columna1;
-	columnaFi = columna2;
-	for(int i=filaInici;i<filaFi;++i){
-		for(int j=columnaInici;i<columnaFi;++j){
-			tauler[i - 1][j - 1] = 'X';
-		}
-	}
-}*/
-
-//DESC: Desmarcar amb . caselles en un rectangle delimitat per l'usuari.
-//PRE: Entra la situació del tauler, la fila i columna de inici del rectangle i la fila i columna del final del rectangle.
-//POST: Posa . totes les posicions dins del rectangle.
-/*void desmarcarCaselles(vector<vector<char>>& tauler, int fila1, int columna1, int fila2, int columna2){
-	int filaInici, filaFi, columnaInici, columnaFi;
-	filaInici = fila1;
-	filaFi = fila2;
-	columnaInici = columna1;
-	columnaFi = columna2;
-	for(int i=filaInici;i<filaFi;++i){
-		for(int j=columnaInici;i<columnaFi;++j){
-			tauler[i - 1][j - 1] = '.';
-		}
-	}
-}*/
-
 //DESC: Funció per a mostrar el tauler del nanograma.
 //PRE: 
 //POST: 
@@ -82,7 +50,7 @@ void mostrarTauler(const vector<vector<char>>& tauler, const vector<vector<int>>
 		}
         cout << (i + 1) << " |"; // Numeración de files
         for (int j = 0; j < columnes; ++j) {
-            cout << " " << tauler[i][j] << " ";
+            cout << tauler[i][j] << "  ";
         }
         cout << "| ";
         
