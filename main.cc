@@ -28,10 +28,10 @@ void mostrarTauler(const vector<vector<char>>& tauler, const vector<vector<int>>
     // Mostra la numeració de les columnes del tauler
     cout << "   ";
     for (int j = 1; j <= columnes; ++j) {
-		if(j <= 10) {
+		if(j < 11) {
 			cout << " " << j << " ";
 		} else {
-			cout << "  " << j;
+			cout << j << " ";
 		}
     }
     cout << endl;
@@ -82,16 +82,23 @@ void mostrarTauler(const vector<vector<char>>& tauler, const vector<vector<int>>
 
     // Mostrar les pistes de columnes sota el tauler
     int maxpistesCol = 0;
-    for (const auto& pista : pistesColumnes) {
-        maxpistesCol = max(maxpistesCol, (int)pista.size());
+    for (unsigned i = 0; i < pistesColumnes.size(); ++i) {
+        int mesura = pistesColumnes[i].size();
+        if ( mesura > maxpistesCol) {
+            maxpistesCol = pistesColumnes[i].size();
+        }
     }
-
+//CULPABLE 
     for (int i = 0; i < maxpistesCol; ++i) {
         cout << "   ";
         for (int j = 0; j < columnes; ++j) {
             int sizepistesCol=pistesColumnes[j].size();
             if (sizepistesCol > i) {
-                cout << " " << pistesColumnes[j][i] << " ";
+                //PROBLEMA AQUI
+                cout << " " << pistesColumnes[j][i];
+                if (j < columnes - 1 && pistesColumnes[j][i] < 10) { // ESTO SOLUCIONA ESPACIOS INDESEADOS AL FINAL
+                    cout << " ";
+                }
             } else {
                 cout << "   ";
             }
@@ -258,7 +265,8 @@ int main() {
     	
 		if(validaNanograma(tauler, pistesFiles, pistesColumnes)){
 			mostrarTauler(tauler, pistesFiles, pistesColumnes);
-			cout << "Has guanyat!" << endl;
+            cout << endl;
+			cout << "Enhorabona! Has resolt el nonograma." << endl;
 			cout << "Nombre de moviments: " << moviments << endl;
 			continuar = false;
 		}
