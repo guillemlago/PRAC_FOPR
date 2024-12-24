@@ -28,7 +28,7 @@ void mostrarTauler(const vector<vector<char>>& tauler, const vector<vector<int>>
     // Mostra la numeració de les columnes del tauler
     cout << "   ";
     for (int j = 1; j <= columnes; ++j) {
-		if(j < 9) {
+		if(j <= 10) {
 			cout << " " << j << " ";
 		} else {
 			cout << "  " << j;
@@ -39,7 +39,11 @@ void mostrarTauler(const vector<vector<char>>& tauler, const vector<vector<int>>
     // Linea separadora superior del tauler
     cout << "    ";
     for (int j = 1; j <= columnes; ++j) {
-        cout << "---";
+        if(j==columnes){
+            cout << "--";
+        } else {
+            cout << "---";
+        }
     }
     cout << endl;
 
@@ -50,15 +54,17 @@ void mostrarTauler(const vector<vector<char>>& tauler, const vector<vector<int>>
 		}
         cout << (i + 1) << " |"; // Numeración de files
         for (int j = 0; j < columnes; ++j) {
-            cout << tauler[i][j] << "  ";
+			cout << tauler[i][j];
+            if(j < columnes - 1) {
+                cout << "  ";
+            } else {
+                cout << " ";
+            }
         }
-        cout << "| ";
+        cout << "|";
         
         for (unsigned j = 0; j < pistesFiles[i].size(); ++j) { 
-			cout << pistesFiles[i][j];
-			if (j < pistesFiles[i].size() - 1) { // Si no es l'ultim element, posa un espai
-				cout << " ";
-			}
+			cout << " " << pistesFiles[i][j];
 		}
 		cout << endl;
     }
@@ -66,7 +72,11 @@ void mostrarTauler(const vector<vector<char>>& tauler, const vector<vector<int>>
     // Mostrar linea separadora inferior del tauler
     cout << "    ";
     for (int j = 1; j <= columnes; ++j) {
-        cout << "---";
+        if(j==columnes){
+            cout << "--";
+        } else {
+            cout << "---";
+        }
     }
     cout << endl;
 
@@ -77,7 +87,7 @@ void mostrarTauler(const vector<vector<char>>& tauler, const vector<vector<int>>
     }
 
     for (int i = 0; i < maxpistesCol; ++i) {
-        cout << "    ";
+        cout << "   ";
         for (int j = 0; j < columnes; ++j) {
             int sizepistesCol=pistesColumnes[j].size();
             if (sizepistesCol > i) {
